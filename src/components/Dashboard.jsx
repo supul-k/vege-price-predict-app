@@ -9,11 +9,11 @@ export default function Dashboard() {
       <div className="w-100">
         <Navbar />
       </div>
-      <div className="h-[calc(100%-112px)]">
-      <Routes>
-        <Route path="/" element={<HeroSection />} />
-        <Route path="/vegetable-list" element={<ProductPage />} />
-      </Routes>
+      <div className="mt-[4rem]">
+        <Routes>
+          <Route path="/" element={<HeroSection />} />
+          <Route path="/vegetable-list" element={<ProductPage />} />
+        </Routes>
       </div>
     </div>
   );

@@ -24,33 +24,26 @@ export default function HeroSection() {
     }
 
     return (
-        <div className="bg-white flex items-center justify-center h-screen">
+        <div className="bg-white flex items-center justify-center" style={{ height: 'calc(100vh - 4rem)' }}>
+            <img
+                src={BackgroundImage}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover filter aria-hidden mt-[4rem] sm:mt-[4rem]"
+            />
             <div className="relative isolate px-6 lg:px-8 max-w-2xl">
-                <div
-                    className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                    aria-hidden="true"
-                >
-                    <div
-                        className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg]"
-                        style={{
-                            BackgroundImage: `url(${BackgroundImage})`,
-                            backgroundSize: 'cover',
-                        }}
-                    />
-                </div>
                 <div className="mx-auto max-w-2xl">
                     <div className="text-center">
-                        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                            Vegetable Price Predictor
+                        <h1 className="font-bold tracking-tight text-green-400 sm:text-6xl text-40">
+                            VEGETABLE PRICE PREDICTOR
                         </h1>
-                        <p className="mt-6 text-lg leading-8 text-gray-600">
+                        <p className="mt-6 text-lg leading-8 text-green-500">
                             Empower your produce investments with the Vegetable Price Predictor. Stay ahead of market fluctuations, make informed buying and selling decisions, and cultivate profitability in the agricultural landscape.
                         </p>
                         <div className="mt-10 flex items-center justify-center gap-x-6">
                             {!showDatePicker && !selectedDate && (
                                 <a
                                     href="#"
-                                    className="text-sm font-semibold leading-6 text-gray-900"
+                                    className="text-sm font-semibold leading-6 text-black-900"
                                     onClick={() => setShowDatePicker(true)}
                                 >
                                     Pick a Date <span aria-hidden="true">→</span>
