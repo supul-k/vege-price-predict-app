@@ -1,12 +1,14 @@
 import react, { useState } from 'react'
 import { loginUser } from '../../api/axios';
-import logo from '../../assets/images/vegeLogo.webp'
+import logo from '../../assets/images/vegeLogo.webp';
+import { useToast } from '../../utils/useToast';
 
 export default function loginPage() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { successToast, errorToast } = useToast();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -20,14 +22,15 @@ export default function loginPage() {
         try {
             const token = await loginUser(user);
             if (token) {
-                // Store the token in local storage or session storage
+                console.log('Token:', token);
                 localStorage.setItem('token', token);
+                successToast('Login successful');
             } else {
-                setError('Invalid email or password');
+                errorToast('Login failed');
             }
         } catch (error) {
             console.error('Login failed:', error);
-            setError('Login failed. Please try again later.');
+            errorToast('Login failed. Please try again later.');
         }
     };
 
@@ -70,11 +73,6 @@ export default function loginPage() {
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                                     Password
                                 </label>
-                                {/* <div className="text-sm">
-                                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                                        Forgot password?
-                                    </a>
-                                </div> */}
                             </div>
                             <div className="mt-2">
                                 <input

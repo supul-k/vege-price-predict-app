@@ -20,10 +20,9 @@ export default function RegisterPage() {
         };
 
         try {
-            const token = await registerUser(user);
-            if (token) {
-                // Store the token in local storage or session storage
-                localStorage.setItem('token', token);
+            const createdUser = await registerUser(user);
+            if (createdUser) {
+                window.location.href = '/login';
             } else {
                 setError('Invalid email or password');
             }
