@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes ,Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import LoginPage from './pages/loginPage/loginPage';
 import RegisterPage from './pages/registerPage/registerPage';
+import AuthGuard from './auth/AuthGuard';
 
 function App() {
 
@@ -17,7 +18,12 @@ function App() {
           {/* ToDo:- should wrap the dashboard component by auth guard
           Logic:- isSuccessLogin ? chiildren : Login
         */}
-          <Route path="*" element={<Dashboard />} />
+          <Route path="*" element={
+            <AuthGuard>
+              <Dashboard />
+            </ AuthGuard>
+          }
+          />
         </Routes>
       </BrowserRouter>
     </div>

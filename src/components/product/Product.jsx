@@ -1,4 +1,4 @@
-export default function Product({product}) {
+export default function Product({ product }) {
     return (
         <div key={product.id} className="group relative">
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -10,15 +10,20 @@ export default function Product({product}) {
             </div>
             <div className="mt-4 flex justify-between">
                 <div>
-                    <h3 className="text-sm text-gray-700">
-                        <a href={product.href}>
-                            <span aria-hidden="true" className="absolute inset-0" />
-                            {product.name}
-                        </a>
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                    <p className="mt-1 font-medium text-sm text-gray-500">{product.name}</p>
+                    <div style={{ display: "flex", alignItems: "flex-end" }}>
+                        <p className="mt-1 text-sm text-gray-500 mr-5">Today Price</p>
+                        <p className="text-sm text-gray-900">{product.todayPrice}</p>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "flex-end" }}>
+                        <p className="mt-1 text-sm text-gray-500 mr-5">Tomorrow Price</p>
+                        <p className="text-sm text-gray-900">{product.tomorrowPrice}</p>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "flex-end" }}>
+                        <p className="mt-1 text-sm text-gray-500 mr-5">Next Week Price</p>
+                        <p className="text-sm text-gray-900">{product.tomorrowPrice}</p>
+                    </div>
                 </div>
-                <p className="text-sm font-medium text-gray-900">{product.price}</p>
             </div>
         </div>
     );

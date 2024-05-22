@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Product from "../../components/product/Product";
 import { fetchVegetableList } from '../../api/axios';
-import carrot from '../../assets/images/vege.webp';
+import carrot from '../../assets/images/carrot.jpg';
 import cabbage from '../../assets/images/cabbage.jpg';
+import tomatoes from '../../assets/images/Tomatoes.webp';
 
 export const ProductPage = () => {
-    // const [products, setProducts] = useState([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -23,21 +23,30 @@ export const ProductPage = () => {
         {
             "id": 1,
             "name": "Carrot",
-            "imageSrc": { carrot },
-            "imageAlt": "Product 1 Image",
-            "href": "#",
-            "color": "Red",
-            "price": "$10.99"
+            "imageSrc": carrot ,
+            "imageAlt": "Carrot Image",
+            "todayPrice": "$10.99",
+            "tomorrowPrice": "$10.99",
+            "nextWeekPrice": "$10.99",
         },
         {
             "id": 2,
-            "name": "Gabbage",
-            "imageSrc": { cabbage },
-            "imageAlt": "Product 1 Image",
-            "href": "#",
-            "color": "Red",
-            "price": "$10.99"
-        }
+            "name": "Cabbage",
+            "imageSrc": cabbage ,
+            "imageAlt": "cabbage Image",
+            "todayPrice": "$10.99",
+            "tomorrowPrice": "$10.99",
+            "nextWeekPrice": "$10.99",
+        },
+        {
+            "id": 3,
+            "name": "Tomatoes",
+            "imageSrc": tomatoes ,
+            "imageAlt": "Tomatoes Image",
+            "todayPrice": "$10.99",
+            "tomorrowPrice": "$10.99",
+            "nextWeekPrice": "$10.99",
+        },
     ]
 
     return (

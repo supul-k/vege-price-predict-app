@@ -25,7 +25,11 @@ export default function loginPage() {
                 console.log('Token:', token);
                 localStorage.setItem('token', token);
                 successToast('Login successful');
+                alert('Login successful');
+                window.location.href = '/';
             } else {
+                console.log('token:', token);
+                alert('Login failed');
                 errorToast('Login failed');
             }
         } catch (error) {

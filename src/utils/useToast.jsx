@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function useToast() {
-  const warnToast = useCallback((text: string) => {
+  const warnToast = useCallback((text) => {
     toast.warn(text, {
       autoClose: 3000,
       hideProgressBar: true,
@@ -13,7 +13,7 @@ export function useToast() {
     });
   }, []);
 
-  const errorToast = useCallback((text: string) => {
+  const errorToast = useCallback((text) => {
     toast.error(text, {
       autoClose: 3000,
       hideProgressBar: true,
@@ -23,7 +23,7 @@ export function useToast() {
     });
   }, []);
 
-  const successToast = useCallback((text: string) => {
+  const successToast = useCallback((text) => {
     toast.success(text, {
       autoClose: 3000,
       hideProgressBar: true,
