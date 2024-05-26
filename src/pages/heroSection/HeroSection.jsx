@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 import { predictVegetablePrice } from "../../api/axios";
 import BackgroundImage from '../../assets/images/vege.webp';
 
@@ -7,21 +8,23 @@ export default function HeroSection() {
 
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
+    const navigate = useNavigate();
 
     const handleDateSelect = (date) => {
         setSelectedDate(date);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (selectedDate) {
             try {
-                const response = predictVegetablePrice(selectedDate);
-                console.log(response.data);
+                const response = await predictVegetablePrice(selectedDate);
+                console.log('Predicted vegetable price:', response);
+                navigate('/vegetable-list', { state: { data: response } });
             } catch (error) {
-                console.error(error);
+                console.error('Error predicting vegetable price:', error);
             }
         }
-    }
+    };
 
     return (
         <div className="bg-white flex items-center justify-center" style={{ height: 'calc(100vh - 4rem)' }}>

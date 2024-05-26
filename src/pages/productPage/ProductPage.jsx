@@ -5,19 +5,7 @@ import carrot from '../../assets/images/carrot.jpg';
 import cabbage from '../../assets/images/cabbage.jpg';
 import tomatoes from '../../assets/images/Tomatoes.webp';
 
-export const ProductPage = () => {
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await fetchVegetableList();
-                setProducts(response);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchProducts();
-    }, []);
+export const ProductPage = ({product}) => {
 
     const products = [
         {
