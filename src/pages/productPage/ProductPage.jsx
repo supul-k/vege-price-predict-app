@@ -7,6 +7,8 @@ import tomatoes from '../../assets/images/Tomatoes.webp';
 
 export const ProductPage = ({product}) => {
 
+    console.log('product', product);
+
     const products = [
         {
             "id": 1,
