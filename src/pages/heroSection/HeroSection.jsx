@@ -9,16 +9,19 @@ export default function HeroSection() {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
     const navigate = useNavigate();
+    const [active, setActive] = useState(true);
 
     const handleDateSelect = (date) => {
         setSelectedDate(date);
     };
 
     const handleSubmit = async () => {
+        setActive(false);
         if (selectedDate) {
             try {
                 const response = await predictVegetablePrice(selectedDate);
                 console.log('Predicted vegetable price:', response);
+                setActive(true);
                 navigate('/vegetable-list', { state: { data: response } });
             } catch (error) {
                 console.error('Error predicting vegetable price:', error);
@@ -63,8 +66,12 @@ export default function HeroSection() {
                                         />
                                     </div>
                                     <button
-                                        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        className={`rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${selectedDate && active
+                                                ? 'bg-indigo-600 hover:bg-indigo-500 focus-visible:outline-indigo-600'
+                                                : 'bg-gray-400 cursor-not-allowed'
+                                            }`}
                                         onClick={() => handleSubmit(selectedDate)}
+                                        disabled={!selectedDate || !active}
                                     >
                                         Predict Price
                                     </button>
