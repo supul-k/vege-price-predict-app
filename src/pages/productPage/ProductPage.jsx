@@ -50,26 +50,43 @@ export const ProductPage = () => {
     const location = useLocation(); 
     const rawProductData = location.state?.rawProductData;
 
-    if (!rawProductData) {
-        return <div>No product data available</div>;
+    // Remove the unwanted line
+    const cleanedData = rawProductData.price.replace(/price: "Date received to Python process.*\n/, '');
+
+    // Parse the cleaned string as JSON
+    let parsedData;
+    try {
+        parsedData = JSON.parse(cleanedData);
+        console.log('parsed Data', parsedData);
+    } catch (error) {
+        console.error('Error parsing JSON:', error);
     }
 
-    const parsedData = rawProductData;
-    console.log('product', parsedData);
-
-    // Extract and transform the product data
+    // Main function to enhance products
     const enhancedProducts = Object.entries(parsedData).map(([name, prices], index) => {
-        const { imageSrc, imageAlt } = imageMapping[name] || {};
+        // Check if the current entry is valid
+        if (!Array.isArray(prices) || prices.length !== 3) {
+            console.warn(`Skipping invalid entry: ${name}`, prices);
+            return null;
+        }
+
+        // Destructure image source and alt text from the image mapping object, providing defaults if not found
+        const { imageSrc = '', imageAlt = '' } = imageMapping[name] || {};
+
+        // Log the prices and name for debugging purposes
+        console.log('Processing:', { name, prices });
+
+        // Construct and return the enhanced product object
         return {
             id: index + 1,
             name,
             imageSrc,
             imageAlt,
-            todayPrice: `$${prices[0].toFixed(2)}`,
-            tomorrowPrice: `$${prices[1].toFixed(2)}`,
-            nextWeekPrice: `$${prices[2].toFixed(2)}`
+            todayPrice: prices[0].toFixed(2),    // Format today's price to 2 decimal places
+            tomorrowPrice: prices[1].toFixed(2), // Format tomorrow's price to 2 decimal places
+            nextWeekPrice: prices[2].toFixed(2)  // Format next week's price to 2 decimal places
         };
-    });
+    }).filter(product => product !== null); // Filter out any null entries
 
     console.log('enhancedProducts', enhancedProducts);
 
@@ -104,7 +121,7 @@ export const ProductPage = () => {
     // ]
 
     return (
-        <div className="grid grid-cols-1 gap-y-16 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pl-6 pr-6">
+        <div className="grid grid-cols-1 gap-y-16 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 pl-6 pr-6">
             {enhancedProducts.map((product) => (
                 <Product key={product.id} product={product} />
             ))}

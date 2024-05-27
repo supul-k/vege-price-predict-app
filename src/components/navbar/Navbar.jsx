@@ -4,8 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom';
 
 const navigation = [
-  { name: 'Dashboard', href: '/', current: true },
-  { name: 'Product List', href: '/vegetable-list', current: false },
+  { name: 'Dashboard', href: '/', current: true }
 ]
 
 function classNames(...classes) {
