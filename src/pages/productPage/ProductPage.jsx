@@ -44,58 +44,60 @@ const imageMapping = {
     "Pumpkin": { imageSrc: pumpkin, imageAlt: "Pumpkin Image" },
 };
 
-export const ProductPage = ({ products }) => {
+export const ProductPage = ({ rawProductData }) => {
 
-    // console.log('product', products);
+    const parsedData = JSON.parse(rawProductData);
+    console.log('product', parsedData);
 
-    // const enhancedProducts = Object.entries(products).map(([name, prices], index) => {
-    //     const { imageSrc, imageAlt } = imageMapping[name] || {};
-    //     return {
-    //         id: index + 1,
-    //         name,
-    //         imageSrc,
-    //         imageAlt,
-    //         todayPrice: `$${prices[0]}`,
-    //         tomorrowPrice: `$${prices[1]}`,
-    //         nextWeekPrice: `$${prices[2]}`
-    //     };
-    // });
+    // Extract and transform the product data
+    const enhancedProducts = Object.entries(parsedData).map(([name, prices], index) => {
+        const { imageSrc, imageAlt } = imageMapping[name] || {};
+        return {
+            id: index + 1,
+            name,
+            imageSrc,
+            imageAlt,
+            todayPrice: `$${prices[0].toFixed(2)}`,
+            tomorrowPrice: `$${prices[1].toFixed(2)}`,
+            nextWeekPrice: `$${prices[2].toFixed(2)}`
+        };
+    });
 
-    // console.log('enhancedProducts', enhancedProducts);
+    console.log('enhancedProducts', enhancedProducts);
 
-    const productss = [
-        {
-            "id": 1,
-            "name": "Carrot",
-            "imageSrc": carrot ,
-            "imageAlt": "Carrot Image",
-            "todayPrice": "$10.99",
-            "tomorrowPrice": "$10.99",
-            "nextWeekPrice": "$10.99",
-        },
-        {
-            "id": 2,
-            "name": "Cabbage",
-            "imageSrc": cabbage ,
-            "imageAlt": "cabbage Image",
-            "todayPrice": "$10.99",
-            "tomorrowPrice": "$10.99",
-            "nextWeekPrice": "$10.99",
-        },
-        {
-            "id": 3,
-            "name": "Tomatoes",
-            "imageSrc": tomatoes ,
-            "imageAlt": "Tomatoes Image",
-            "todayPrice": "$10.99",
-            "tomorrowPrice": "$10.99",
-            "nextWeekPrice": "$10.99",
-        },
-    ]
+    // const productss = [
+    //     {
+    //         "id": 1,
+    //         "name": "Carrot",
+    //         "imageSrc": carrot ,
+    //         "imageAlt": "Carrot Image",
+    //         "todayPrice": "$10.99",
+    //         "tomorrowPrice": "$10.99",
+    //         "nextWeekPrice": "$10.99",
+    //     },
+    //     {
+    //         "id": 2,
+    //         "name": "Cabbage",
+    //         "imageSrc": cabbage ,
+    //         "imageAlt": "cabbage Image",
+    //         "todayPrice": "$10.99",
+    //         "tomorrowPrice": "$10.99",
+    //         "nextWeekPrice": "$10.99",
+    //     },
+    //     {
+    //         "id": 3,
+    //         "name": "Tomatoes",
+    //         "imageSrc": tomatoes ,
+    //         "imageAlt": "Tomatoes Image",
+    //         "todayPrice": "$10.99",
+    //         "tomorrowPrice": "$10.99",
+    //         "nextWeekPrice": "$10.99",
+    //     },
+    // ]
 
     return (
         <div className="grid grid-cols-1 gap-y-16 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pl-6 pr-6">
-            {productss.map((product) => (
+            {enhancedProducts.map((product) => (
                 <Product key={product.id} product={product} />
             ))}
         </div>
