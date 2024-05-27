@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Product from "../../components/product/Product";
 import carrot from '../../assets/images/vegetables/carrot.jpg';
 import cabbage from '../../assets/images/vegetables/cabbage.jpg';
@@ -44,9 +45,16 @@ const imageMapping = {
     "Pumpkin": { imageSrc: pumpkin, imageAlt: "Pumpkin Image" },
 };
 
-export const ProductPage = ({ rawProductData }) => {
+export const ProductPage = () => {
 
-    const parsedData = JSON.parse(rawProductData);
+    const location = useLocation(); 
+    const rawProductData = location.state?.rawProductData;
+
+    if (!rawProductData) {
+        return <div>No product data available</div>;
+    }
+
+    const parsedData = rawProductData;
     console.log('product', parsedData);
 
     // Extract and transform the product data
