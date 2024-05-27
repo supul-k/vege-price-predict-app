@@ -20,9 +20,8 @@ export default function HeroSection() {
         if (selectedDate) {
             try {
                 const response = await predictVegetablePrice(selectedDate);
-                console.log('Predicted vegetable price:', response);
                 setActive(true);
-                navigate('/vegetable-list', { state: { data: response } });
+                navigate('/vegetable-list', { state: { rawProductData: response } });
             } catch (error) {
                 console.error('Error predicting vegetable price:', error);
             }
